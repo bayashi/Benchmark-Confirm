@@ -10,7 +10,7 @@ my $builder = Module::Build->new(
     requires => {
         'perl' => '5.8.1',
         'Benchmark' => 1.051,
-        'Test::More' => 0,
+        'Test::More' => 0.88,
     },
     add_to_cleanup      => [ 'Benchmark-Confirm-*' ],
     meta_merge     => {
