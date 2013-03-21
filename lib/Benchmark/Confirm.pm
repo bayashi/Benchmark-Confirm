@@ -11,28 +11,42 @@ Benchmark::Confirm - take a Benchmark and confirm returned values
 
 =head1 SYNOPSIS
 
-    use Benchmark::Confirm qw/timethese cmpthese/;
+for example, it is ordinary to execute benchmark script...
 
-    my $result = timethese( 100_000 => +{
-        Name1 => sub { "something" },
-        Name2 => sub { "something" },
-        Name3 => sub { "something" },
-    });
+    perl some_benchmark.pl
 
-    cmpthese $result;
+and use Benchmark::Confirm
 
-    # after Benchmark, display confirmations like this:
-    # ok 1
-    # ok 2
-    # ok 3
-    # 1..3
+    perl -MBenchmark::Confirm some_benchmark.pl
+
+then you get the result of benchmark and the confirmination.
+
+    Benchmark: timing 1 iterations of Name1, Name2, Name3...
+         Name1:  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+                (warning: too few iterations for a reliable count)
+         Name2:  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+                (warning: too few iterations for a reliable count)
+         Name3:  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+                (warning: too few iterations for a reliable count)
+                        Rate Name3 Name1 Name2
+    Name3 10000/s    --    0%    0%
+    Name1 10000/s    0%    --    0%
+    Name2 10000/s    0%    0%    --
+    ok 1
+    ok 2
+    ok 3
+    1..3
+
+See the last 4 lines, these are the result of confirmation.
 
 
 =head1 DESCRIPTION
 
-B<Benchmark::Confirm> confirms that the each values from benchmark codes are equivalent or not.
+B<Benchmark::Confirm> displays a confirmation after benchmarks that the each values from benchmark codes are equivalent or not.
 
-All you have to do is to replace C<use Benchmark> by C<use Benchmark::Confirm>.
+All you have to do is to use C<Benchmark::Confirm> instead of C<Benchmark>.
+
+However, if you write some benchmarks in the one script, you should call some methods from C<Benchmark::Confirm>. for more details see below METHODS section.
 
 
 =head1 METHODS
