@@ -5,7 +5,7 @@ This is Perl module B<Benchmark::Confirm>.
 
 =begin html
 
-<a href="http://travis-ci.org/bayashi/Benchmark-Confirm"><img src="https://secure.travis-ci.org/bayashi/Benchmark-Confirm.png"/></a>
+<a href="http://travis-ci.org/bayashi/Benchmark-Confirm"><img src="https://secure.travis-ci.org/bayashi/Benchmark-Confirm.png"/></a> <a href="https://coveralls.io/r/bayashi/Benchmark-Confirm"><img src="https://coveralls.io/repos/bayashi/Benchmark-Confirm/badge.png?branch=master"/></a>
 
 =end html
 
