@@ -134,6 +134,7 @@ END {
 
 sub atonce {
     require Test::More;
+    Test::More->import;
 
     my $expect = _normalize(shift @CONFIRMS);
     Test::More::ok(1);
