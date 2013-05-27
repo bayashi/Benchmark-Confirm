@@ -7,6 +7,9 @@ my $builder = Module::Build->new(
     license             => 'perl',
     dist_author         => 'Dai Okabayashi <bayashi@cpan.org>',
     dist_version_from   => 'lib/Benchmark/Confirm.pm',
+    configure_requires  => {
+        'Module::Build' => 0.38,
+    },
     requires => {
         'perl' => '5.8.1',
         'Benchmark' => 1.051,
