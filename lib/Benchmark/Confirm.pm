@@ -2,7 +2,7 @@ package Benchmark::Confirm;
 use strict;
 use warnings;
 
-our $VERSION = '0.23';
+our $VERSION = '0.03';
 
 =head1 NAME
 
