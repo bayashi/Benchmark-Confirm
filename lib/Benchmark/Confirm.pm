@@ -119,13 +119,33 @@ modify it under the same terms as Perl itself. See L<perlartistic>.
 
 use Benchmark;
 
+my $capture;
+
 sub import {
-    Benchmark->export_to_level(1, @_);
+    my @imports;
+    for my $func (@_) {
+        next unless $func;
+        if ($func eq 'TAP') {
+            require IO::Capture::Stdout;
+            $capture = IO::Capture::Stdout->new;
+            $capture->start;
+        }
+        else {
+            push @imports, $func;
+        }
+    }
+    Benchmark->export_to_level(1, @imports);
 }
 
 our @CONFIRMS;
 
 END {
+    if (ref $capture eq 'IO::Capture::Stdout') {
+        $capture->stop;
+        while ( my $line = $capture->read ) {
+            print "# ${line}"; # valid TAP
+        }
+    }
     if (@CONFIRMS > 1) {
         atonce() ;
         Test::More::done_testing();
