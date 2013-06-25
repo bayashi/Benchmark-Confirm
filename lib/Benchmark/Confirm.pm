@@ -118,17 +118,28 @@ modify it under the same terms as Perl itself. See L<perlartistic>.
 =cut
 
 use Benchmark;
+use Test::More;
 
 my $capture;
 
 sub import {
-    my @imports;
+    my $class = shift;
+
+    my $caller = caller;
+
+    my @imports = ($class);
     for my $func (@_) {
         next unless $func;
         if ($func eq 'TAP') {
             require IO::Capture::Stdout;
             $capture = IO::Capture::Stdout->new;
             $capture->start;
+        }
+        elsif ($func eq 'no_plan') {
+            no strict 'refs'; ## no critic
+            for my $f ( @Test::More::EXPORT ) {
+                *{"${caller}::$f"} = \&{"Test::More::$f"};
+            }
         }
         else {
             push @imports, $func;
@@ -153,9 +164,6 @@ END {
 }
 
 sub atonce {
-    require Test::More;
-    Test::More->import;
-
     my $expect = _normalize(shift @CONFIRMS);
     Test::More::ok(1);
 
