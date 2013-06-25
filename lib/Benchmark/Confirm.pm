@@ -158,7 +158,7 @@ END {
         }
     }
     if (@CONFIRMS > 1) {
-        atonce() ;
+        atonce();
         Test::More::done_testing();
     }
 }
