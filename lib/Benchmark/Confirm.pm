@@ -89,6 +89,51 @@ You can use this function when you write some benchmarks in one script. Or you s
 This function resets stacks of returned value.
 
 
+=head1 IMPORT OPTIONS
+
+=head2 TAP
+
+If you want to get valid TAP result, you should add import option C<TAP>.
+
+    perl -MBenchmark::Confirm=TAP some_benchmark.pl
+
+Then you get results as valid TAP like below.
+
+    # Benchmark: timing 1 iterations of Name1, Name2, Name3...
+    #      Name1:  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+    #             (warning: too few iterations for a reliable count)
+    #      Name2:  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+    #             (warning: too few iterations for a reliable count)
+    #      Name3:  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+    #             (warning: too few iterations for a reliable count)
+    #                     Rate Name3 Name1 Name2
+    # Name3 10000/s    --    0%    0%
+    # Name1 10000/s    0%    --    0%
+    # Name2 10000/s    0%    0%    --
+    ok 1
+    ok 2
+    ok 3
+    1..3
+
+=head2 no_plan
+
+If you want to add more tests with benchmarks, you should use import option C<no_plan>.
+
+    use Benchmark::Confirm qw/no_plan timethese cmpthese/;
+
+    my $result = timethese( 1 => +{
+        Name1 => sub { "something" },
+        Name2 => sub { "something" },
+        Name3 => sub { "something" },
+    });
+
+    cmpthese $result;
+
+    ok 1, 'additionaly';
+
+Don't worry, C<Test::More::done_testing> invokes in C<END> block of Benchmark::Confirm. So you don't need write that.
+
+
 =head1 CAVEATS
 
 If benchmark code returns CODE reference, then C<Benchmark::Confirm> treats it as string value: 'CODE'. This may change in future releases.
