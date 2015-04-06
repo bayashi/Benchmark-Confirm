@@ -4,7 +4,7 @@
       "Dai Okabayashi <bayashi@cpan.org>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4005, CPAN::Meta::Converter version 2.130880",
+   "generated_by" : "Module::Build version 0.421",
    "license" : [
       "perl_5"
    ],
@@ -38,7 +38,7 @@
    "provides" : {
       "Benchmark::Confirm" : {
          "file" : "lib/Benchmark/Confirm.pm",
-         "version" : "0.04"
+         "version" : "1.00"
       }
    },
    "release_status" : "stable",
@@ -53,5 +53,5 @@
          "url" : "http://github.com/bayashi/Benchmark-Confirm"
       }
    },
-   "version" : "0.04"
+   "version" : "1.00"
 }
